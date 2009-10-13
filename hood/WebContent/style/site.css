@@ -56,13 +56,38 @@ body
 #map
 {
 	width: 730px;
-	height: 480px;
+	height: 515px;
 	padding: 10px;
+}
+
+#sidebar a,#sidebar i
+{
+	display: block;
+	padding: 0.1em 0;
+}
+
+#sidebar a.home
+{
+	display: block;
+	background: url("../image/logo.png");
+	width: 180px;
+	height: 100px;
+}
+
+.right
+{
+	float: right;
+}
+
+a.home .text
+{
+	display: none;
 }
 
 p
 {
-	padding-top: 1.5em;
+	padding-top: 1em;
+	padding-bottom: 0.5em;
 }
 
 #newObject ul

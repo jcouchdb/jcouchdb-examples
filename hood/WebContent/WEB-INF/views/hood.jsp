@@ -11,7 +11,7 @@
 <c:forEach var="curHood" items="${hoods}">
     <c:choose>
         <c:when test="${curHood.id == hood.id}">
-        <b title="${hood.description}">${curHood.name}</b>
+        <i title="${hood.description}">${curHood.name}</i>
         </c:when>
         <c:otherwise>
         <hood:link href="/app/hood?id=${curHood.id}" title="${curHood.description}" >${curHood.name}</hood:link>

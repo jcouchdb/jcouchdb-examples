@@ -28,7 +28,7 @@ function onMarkerDelClick(ev)
     {
         var href = this.href;
         
-        console.debug("href = %s", href)
+        //console.debug("href = %s", href)
         $.ajax({
             url: href,
             dataType: "html",

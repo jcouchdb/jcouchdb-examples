@@ -50,24 +50,19 @@
 <!--[if IE 8 ]>    <body class="ie8"> <![endif]--> 
 
 <div id="page">
-<div id="header">
-<h1>
-<hood:link href="/app/home"><span class="text">hood</span></hood:link>
-</h1>
-</div>
 <div class="clear">
-<c:if test="${!empty sidebar}">
     <div id="sidebar">
+        <hood:link class="home" href="/app/home"><span class="text">hood</span></hood:link>
     	<jsp:invoke fragment="sidebar"/>
     </div>
-</c:if>
 	<div id="content">
 </c:if> 
 		<jsp:doBody />
 <c:if test="${empty param.ajax}">
 	 </div>
 </div>
-<div id="footer">&copy; 2009 Sven Helmberger</div>
+<div id="footer" class="clear"><b>Help:</b> double click on map to create new object, click marker for details/delete 
+<span class="right">&copy; 2009 Sven Helmberger</span></div>
 </div>
 </body>
 </html>
