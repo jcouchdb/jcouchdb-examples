@@ -80,7 +80,7 @@ public class NewObjectController
             }
         }
 
-        log.debug("Request encoding is {}, creating {}", request.getCharacterEncoding(), newObjectCommand);
+        log.debug("Request value is {}, creating {}", request.getParameter("name"), newObjectCommand);
         
         BaseDocument doc = new BaseDocument();
         doc.setProperty("docType", newObjectCommand.getType().getDomainType().getSimpleName());

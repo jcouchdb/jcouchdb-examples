@@ -1,7 +1,9 @@
 package org.hood;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hood.domain.LatLon;
 import org.hood.domain.PositionedDocument;
@@ -74,8 +76,6 @@ public class LocationServiceImpl
 
     public String getDocumentsWithinBoundsJSON(LatLon ne, LatLon sw)
     {
-        StringBuilder json = new StringBuilder();
-
         // XXX: Sucky querying algorithm, should be replaced by a real external
         // lat/lon indexer
 
@@ -105,25 +105,36 @@ public class LocationServiceImpl
                 docIds.add(row.getId());
             }
         }
-
-        // JSON data Flow would be couchdb -> controller -> client-side js
-        // so we just pass along the uninterpreted couchdb JSON documents to
-        // save some JSON parsing / JSONifiying which
-        // we don't need because the data here is only used in client-side js
-        json.append('[');
-        boolean first = true;
-        for (String docId : docIds)
-        {
-            String content = getRawDocument(docId);
-            if (!first)
-            {
-                json.append(',');
-            }
-            json.append(content);
-            first = false;
-        }
-        json.append(']');
+        
+        String json = getRawDocuments(docIds);
+        log.debug("Raw JSON: {}", json);
         return json.toString();
+    }
+
+
+    private String getRawDocuments(List<String> docIds)
+    {
+        Map m = new HashMap();
+        m.put("keys", docIds);
+
+        Response response = null;
+        try
+        {
+            // get all docs by posting the keys to _all_docs
+            response = systemDatabase.getServer().post("/" + systemDatabase.getName() + "/_all_docs?include_docs=true", jsonConfig.getJsonGenerator().forValue(m));
+            return response.getContentAsString();
+        }
+        finally
+        {
+            // *DON'T* forget to destroy the response object if you do stuff
+            // like this otherwise bad things will happen 
+            // (e.g. connection leaks in http core making everything hang due
+            //  to hitting the connection limit)
+            if (response != null)
+            {
+                response.destroy();
+            }
+        }
     }
 
 
@@ -156,27 +167,4 @@ public class LocationServiceImpl
         return new Options().startKey(endLat).endKey(startLat).descending(true);
     }
 
-
-    private String getRawDocument(String docId)
-    {
-        Response response = null;
-        try
-        {
-            // get the document content as string from couchdb
-            response = systemDatabase.getServer().get("/" + systemDatabase.getName() + "/" + docId);
-            return response.getContentAsString();
-        }
-        finally
-        {
-            // *DON'T* forget to destroy the response object if you do stuff
-            // like this
-            // otherwise bad things will happen (connection leaks in http core
-            // to be exact with following
-            // hanging of everything due to hitting the connection limit)
-            if (response != null)
-            {
-                response.destroy();
-            }
-        }
-    }
 }

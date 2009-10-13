@@ -31,6 +31,8 @@
 </script>
 <script type="text/javascript" src="<c:url value="/script/json2.js"/>">
 </script>
+<script type="text/javascript" src="<c:url value="/script/firebug-emu.js"/>">
+</script>
 
 <c:forTokens var="item" items="${script}" delims=",">
     <script type="text/javascript"

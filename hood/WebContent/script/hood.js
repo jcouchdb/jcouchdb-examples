@@ -1,15 +1,5 @@
 (function($)
 {
-
-if (!this.console)
-{
-    this.console = {
-            error: function() {},
-            debug: function() {},
-            warn: function() {},
-            info: function() {}
-    };
-}
     
 var map ;    
 var baseIcon;
@@ -43,11 +33,13 @@ function onMarkerDelClick(ev)
 }
 
 
-function receiveObjectsResponse(objects)
+function receiveObjectsResponse(result)
 {
-    for (var i=0; i < objects.length; i++)
+    var rows = result.rows;
+    var len = rows.length;
+    for (var i=0; i < len; i++)
     {
-        var obj = objects[i];
+        var obj = rows[i].doc;
         
         if (!allMarkers[obj._id])
         {
@@ -178,6 +170,7 @@ function submitForm(ev)
                             if (marker)
                             {
                                 map.removeOverlay(marker);
+                                delete allMarkers[result.deleted];
                             }
                         }
                         else
