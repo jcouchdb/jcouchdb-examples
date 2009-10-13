@@ -53,6 +53,7 @@ public class NewObjectCommand
     }
     
     
+    
     public static enum Type
     {
         HOOD(Hood.class), PLACE(Place.class), PERSON(Person.class);
@@ -68,6 +69,15 @@ public class NewObjectCommand
         {
             return domainType;
         }
+    }
+
+
+
+    @Override
+    public String toString()
+    {
+        return "NewObjectCommand [description=" + description + ", lat=" + lat + ", lon=" + lon +
+            ", name=" + name + ", type=" + type + "]";
     }
 
 }
