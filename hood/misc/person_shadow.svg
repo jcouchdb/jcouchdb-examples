@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1000"
+   height="853.35999"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.47pre2 r22153"
+   sodipodi:docname="person_shadow.svg"
+   inkscape:export-filename="/home/shelmberger/workspace/hood/misc/person_shadow.png"
+   inkscape:export-xdpi="3.8800001"
+   inkscape:export-ydpi="3.8800001">
+  <defs
+     id="defs4">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective10" />
+    <inkscape:perspective
+       id="perspective3694"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <filter
+       inkscape:collect="always"
+       id="filter4658"
+       x="-0.075621247"
+       width="1.1512425"
+       y="-0.13141406"
+       height="1.2628281"
+       color-interpolation-filters="sRGB">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="20.967216"
+         id="feGaussianBlur4660" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4"
+     inkscape:cx="206.25152"
+     inkscape:cy="157.61938"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1680"
+     inkscape:window-height="967"
+     inkscape:window-x="0"
+     inkscape:window-y="26"
+     inkscape:window-maximized="1"
+     showguides="true"
+     inkscape:guide-bbox="true">
+    <sodipodi:guide
+       orientation="1,0"
+       position="362.85714,238.57143"
+       id="guide3679" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="445.71429,1.4285714"
+       id="guide3715" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-198.99813)">
+    <path
+       style="opacity:0.5;color:#000000;fill:none;stroke:#000000;stroke-width:53.50676727;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter4658);enable-background:accumulate"
+       d="m 686.45466,641.31881 c -75.16755,0 -196.06843,37.61623 -228.60426,76.89062 -20.01102,24.15555 -17.22677,45.88232 3.36705,60.96875 -78.0076,7.46593 -119.50688,23.16721 -182.6063,51.01563 -98.08782,43.29017 -147.16634,159.76566 -147.16634,159.76566 l 229.68773,0 73.03125,0 229.6875,0 c 0,0 143.90353,-116.47549 117.54111,-159.76566 -16.95882,-27.84842 -32.4435,-43.5497 -98.0812,-51.01563 45.58972,-15.08643 84.37193,-36.8132 104.38295,-60.96875 32.53583,-39.27439 -26.07194,-76.89062 -101.23949,-76.89062 z M 393.5422,994.89697 369.23314,1024.2407 393.5422,994.89697 z"
+       id="path3627" />
+  </g>
+</svg>

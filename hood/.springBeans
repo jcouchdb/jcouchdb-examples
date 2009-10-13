@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beansProjectDescription>
+	<version>1</version>
+	<pluginVersion><![CDATA[2.2.6.200908051215-RELEASE]]></pluginVersion>
+	<configSuffixes>
+		<configSuffix><![CDATA[xml]]></configSuffix>
+	</configSuffixes>
+	<enableImports><![CDATA[false]]></enableImports>
+	<configs>
+		<config>WebContent/WEB-INF/config/data-access-config.xml</config>
+		<config>WebContent/WEB-INF/config/security-config.xml</config>
+		<config>WebContent/WEB-INF/config/services-config.xml</config>
+		<config>WebContent/WEB-INF/config/webmvc-config.xml</config>
+	</configs>
+	<configSets>
+		<configSet>
+			<name><![CDATA[config]]></name>
+			<allowBeanDefinitionOverriding>true</allowBeanDefinitionOverriding>
+			<incomplete>false</incomplete>
+			<configs>
+				<config>WebContent/WEB-INF/config/data-access-config.xml</config>
+				<config>WebContent/WEB-INF/config/security-config.xml</config>
+				<config>WebContent/WEB-INF/config/services-config.xml</config>
+				<config>WebContent/WEB-INF/config/webmvc-config.xml</config>
+			</configs>
+		</configSet>
+	</configSets>
+</beansProjectDescription>

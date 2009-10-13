@@ -1,0 +1,146 @@
+/*
+#46372d		brown
+#ffffbb		light
+#d6d47f		medium
+#969c23		full color
+#4d4c44		grey
+*/
+
+body
+{
+	background: #4d4c44;
+}
+
+#page
+{
+	background: #d6d47f;
+	width: 950px;
+	margin: 0 auto;
+}
+
+#header
+{
+	background: #ffffbb;
+}
+
+#header h1
+{
+	color: #4d4c44;
+	font-size: 2em;
+	text-align: center;
+	padding: 0.1em 0;
+}
+
+#content
+{
+	background: white;
+	color: #101010;
+	width: 750px;
+}
+#sidebar
+{
+	background: #d6d47f;
+	width: 180px;
+	padding: 10px;
+	float: right;
+}
+
+#footer
+{
+	background: #46372d;
+	color: #f2f3e9;
+	padding: 4px;
+	font-size: 0.9em;
+}
+
+#map
+{
+	width: 730px;
+	height: 480px;
+	padding: 10px;
+}
+
+p
+{
+	padding-top: 1.5em;
+}
+
+#newObject ul
+{
+	padding: 1em 0;
+}
+
+#newObject ul li
+{
+	padding-left: 4ex;
+	list-style-type: none;
+}
+
+#newObject dt
+{
+	width: 120px;
+	float: left;
+	clear: left;
+	padding-left: 20px;
+}
+
+#newObject dd
+{
+	float: left;
+}
+
+#newObject .submit
+{
+}
+
+table
+{	
+	border-collapse: collapse;
+	margin: 10px;
+}
+th,td
+{
+	border: 1px solid #4d4c44;
+	padding: 4px;
+}
+
+th
+{
+	background: #d6d47f;
+}
+
+.popup
+{
+	display: block;
+	top: 20px;
+	left: 50%;
+	position: absolute;
+	width: 680px;
+	margin-left: -350px;
+	border: 1px solid #666;
+	background: white;
+	padding: 10px;
+	
+	opacity: .85; /* Standard: FF gt 1.5, Opera, Safari */
+	filter: alpha(opacity=85); /* IE lt 8 */
+	-ms-filter: "alpha(opacity=85)"; /* IE 8 */
+	-khtml-opacity: .85; /* Safari 1.x */
+	-moz-opacity: .85; /* FF lt 1.5, Netscape */
+}
+
+/********************************************************************** 
+   Clearing floats without extra markup
+   Based on How To Clear Floats Without Structural Markup by PiE
+   [ http://www.positioniseverything.net/easyclearing.html ] 
+*/
+.clear { display: inline-block; }   
+.clear:after {
+  content: "."; 
+  display: block; 
+  height: 0; 
+  clear: both; 
+  visibility: hidden;
+}
+* html .clear { height: 1%; }
+.clear { display: block; }
+/***********************************************************************/
