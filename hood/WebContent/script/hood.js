@@ -246,7 +246,7 @@ function loadObjectsInBounds()
     var southWest = bounds.getSouthWest();
     var northEast = bounds.getNorthEast();
     
-    //console.debug("delta lat = %s, delta lon = %s", northEast.lat()-southWest.lat(), northEast.lng()-southWest.lng())
+    console.debug("delta lat = %s, delta lon = %s", northEast.lat()-southWest.lat(), northEast.lng()-southWest.lng())
     
     $.ajax({
         url: baseURL + "/app/objects/json",

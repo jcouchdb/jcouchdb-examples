@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="hood" default="all">
+    <description>
+            Example project for jcouchdb ( Spring WebMVC / JSP / CouchDB)
+    </description>
+	
+	<property file="${basedir}/build.properties" />
+
+    <property name="project.sources" location="src"/>
+    <property name="project.build" location="build"/>
+    <property name="project.classes" location="${project.build}/classes"/>
+    <property name="project.web" location="WebContent"/>
+    <property name="project.web.libs" location="${project.web}/WEB-INF/lib"/>
+    <property name="project.compile.libs" location="lib"/>
+
+    <target name="init">
+        <mkdir dir="${project.classes}" />
+
+        <path id="project.classpath">
+            <fileset dir="${project.web.libs}">
+                <include name="*.jar" />
+            </fileset>
+            <fileset dir="${project.compile.libs}">
+                <include name="*.jar" />
+            </fileset>
+        </path>
+    </target>
+
+    <target name="clean">
+        <delete dir="${project.build}" includeemptydirs="true" />
+    </target>
+
+    <target name="compile" depends="init">
+        <javac srcdir="${project.sources}" destdir="${project.classes}" source="1.5" target="1.5" debug="true" optimize="true" classpathref="project.classpath" />
+        <copy todir="${project.classes}">
+            <fileset dir="${project.sources}">
+                <include name="**/*.properties"/>
+                <include name="**/*.xml"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="dist" depends="compile" description="create distribution archive">
+        <zip destfile="${project.build}/${ant.project.name}-${project.version}.zip">
+            <zipfileset prefix="${ant.project.name}-${project.version}/" dir="${basedir}">
+                <include name="**/*"/>
+            	<exclude name="prod/**/*"/>
+                <exclude name="synch*.sh"/>
+            </zipfileset>
+        </zip>
+    </target>
+	
+    <target name="all" depends="dist"/>
+
+</project>
