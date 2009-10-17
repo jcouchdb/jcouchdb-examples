@@ -1,14 +1,12 @@
 package org.hood.controller;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.hood.LocationService;
 import org.hood.util.JSONView;
-import org.jcouchdb.db.Database;
-import org.jcouchdb.document.BaseDocument;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,35 +17,39 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.svenson.JSONConfig;
 
+/**
+ * Drives the new Object form with AJAX or not
+ * @author shelmberger
+ *
+ */
 @Controller
 public class NewObjectController
 {
     private static Logger log = LoggerFactory.getLogger(NewObjectController.class);
-    
-    private Database systemDatabase;
 
-    private JSONConfig jsonConfig;
-    
+    private LocationService locationService;
+        
     @Autowired
-    public void setJsonConfig(JSONConfig jsonConfig)
+    public void setLocationService(LocationService locationService)
     {
-        this.jsonConfig = jsonConfig;
-    }
-
-    @Autowired
-    public void setSystemDatabase(Database systemDatabase)
-    {
-        this.systemDatabase = systemDatabase;
+        this.locationService = locationService;
     }
     
+    /**
+     * Shows the form for the new object. AJAX handling is done by the page.tag
+     * @return
+     */
     @RequestMapping("/new")
     public ModelAndView showNewObjectForm()
     {
         return new ModelAndView("newObject");
     }
     
+    /**
+     * Provides the form with an object to bind to
+     * @return
+     */
     @ModelAttribute("newObject")
     public NewObjectCommand initCommand()
     {
@@ -56,6 +58,15 @@ public class NewObjectController
 
     private NewObjectCommandValidator newObjectCommandValidator = new NewObjectCommandValidator();
     
+    /**
+     * Handle form post back.
+     * 
+     * @param request               request
+     * @param ajax                  if not <code>null</code>, respond with JSON, otherwise redirect to <code>/app/home</code>
+     * @param newObjectCommand      object the request params were bound to
+     * @param bindingResult         binding result for that object
+     * @return
+     */
     @RequestMapping(value = "/new/create")
     public ModelAndView createNew(
         HttpServletRequest request,
@@ -81,15 +92,6 @@ public class NewObjectController
         }
 
         log.debug("Request value is {}, creating {}", request.getParameter("name"), newObjectCommand);
-        
-        BaseDocument doc = new BaseDocument();
-        doc.setProperty("docType", newObjectCommand.getType().getDomainType().getSimpleName());
-        doc.setProperty("name", newObjectCommand.getName());
-        doc.setProperty("description", newObjectCommand.getDescription());
-        doc.setProperty("loc", Arrays.asList(newObjectCommand.getLat(), newObjectCommand.getLon()));
-
-
-        systemDatabase.createDocument(doc);
         
         if (ajax != null)
         {            

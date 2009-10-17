@@ -1,14 +1,17 @@
 package org.hood.controller;
 
-import org.hood.domain.Hood;
-import org.hood.domain.Person;
-import org.hood.domain.Place;
 
+/**
+ * Wrap new object form data
+ * 
+ * @author shelmberger
+ *
+ */
 public class NewObjectCommand
 {
     private String name, description;
     private double lat, lon;
-    private Type type = Type.PLACE;
+    private LocationType locationType = LocationType.PLACE;
     
     public String getName()
     {
@@ -43,41 +46,22 @@ public class NewObjectCommand
         this.lon = lon;
     }
     
-    public Type getType()
+    public LocationType getLocationType()
     {
-        return type;
+        return locationType;
     }
-    public void setType(Type type)
+    public void setLocationType(LocationType locationType)
     {
-        this.type = type;
+        this.locationType = locationType;
     }
     
     
     
-    public static enum Type
-    {
-        HOOD(Hood.class), PLACE(Place.class), PERSON(Person.class);
-        
-        private Class domainType;
-        
-        private Type(Class cls)
-        {
-            this.domainType = cls;
-        }
-        
-        public Class getDomainType()
-        {
-            return domainType;
-        }
-    }
-
-
-
     @Override
     public String toString()
     {
         return "NewObjectCommand [description=" + description + ", lat=" + lat + ", lon=" + lon +
-            ", name=" + name + ", type=" + type + "]";
+            ", name=" + name + ", type=" + locationType + "]";
     }
 
 }

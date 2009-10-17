@@ -1,15 +1,18 @@
 package org.hood;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hood.controller.LocationType;
 import org.hood.domain.LatLon;
 import org.hood.domain.PositionedDocument;
 import org.jcouchdb.db.Database;
 import org.jcouchdb.db.Options;
 import org.jcouchdb.db.Response;
+import org.jcouchdb.document.BaseDocument;
 import org.jcouchdb.document.ValueAndDocumentRow;
 import org.jcouchdb.document.ValueRow;
 import org.jcouchdb.document.ViewAndDocumentsResult;
@@ -190,4 +193,17 @@ public class LocationServiceImpl
         return new Options().startKey(endLat).endKey(startLat).descending(true);
     }
 
+    public void createLocation(LocationType type, String name, String description, LatLon location)
+    {
+        // to make our job easy, we just create the different types over a base document. 
+        BaseDocument doc = new BaseDocument();
+        doc.setProperty("docType", type.getDomainType().getSimpleName());
+        doc.setProperty("name", name);
+        doc.setProperty("description", description);
+        
+        // since we're not using a PostionedDocument, we don't get the automatic conversion
+        doc.setProperty("loc", Arrays.asList(location.getLatitude(), location.getLongitude()));
+
+        systemDatabase.createDocument(doc);
+    }
 }

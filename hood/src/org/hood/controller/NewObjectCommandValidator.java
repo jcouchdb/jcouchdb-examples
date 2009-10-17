@@ -4,6 +4,12 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+/**
+ * Validates the new object data
+ * 
+ * @author shelmberger
+ *
+ */
 public class NewObjectCommandValidator
     implements Validator
 {
@@ -18,12 +24,11 @@ public class NewObjectCommandValidator
     {
         NewObjectCommand cmd = (NewObjectCommand)o;
         
-        if (cmd.getType() == null)
+        if (cmd.getLocationType() == null)
         {
             errors.rejectValue("type", "NoType", "You need to select a type");
         }
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NoName", "You must enter a name");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "description", "NoDesc", "You must enter a description");
     }
 
 }

@@ -2,6 +2,7 @@ package org.hood;
 
 import java.util.List;
 
+import org.hood.controller.LocationType;
 import org.hood.domain.Hood;
 import org.hood.domain.LatLon;
 import org.hood.domain.Person;
@@ -36,4 +37,14 @@ public interface LocationService
      * @return
      */
     String getDocumentsWithinBoundsJSON(LatLon ne, LatLon sw);
+
+    /**
+     * Creates a new location with the given parameters
+     * 
+     * @param type              type enum
+     * @param name              Name of the location
+     * @param description       description of the location
+     * @param location          location
+     */
+    void createLocation(LocationType type, String name, String description, LatLon location);
 }
