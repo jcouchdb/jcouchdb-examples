@@ -19,6 +19,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 import org.svenson.JSONConfig;
 
+/**
+ * CouchDB implementation of the location interface
+ * 
+ * @author shelmberger
+ *
+ */
 public class LocationServiceImpl
     implements LocationService
 {
@@ -28,21 +34,30 @@ public class LocationServiceImpl
 
     private JSONConfig jsonConfig;
 
-
+    /**
+     * Configures the JSONConfig to be used 
+     * @param jsonConfig
+     */
     @Required
     public void setJsonConfig(JSONConfig jsonConfig)
     {
         this.jsonConfig = jsonConfig;
     }
 
-
+    /**
+     * Configures the hood system database
+     * 
+     * @param systemDatabase
+     */
     @Required
     public void setSystemDatabase(Database systemDatabase)
     {
         this.systemDatabase = systemDatabase;
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     public List<PositionedDocument> getDocumentsWithinBounds(LatLon ne, LatLon sw)
     {
         double startLon = ne.getLongitude();
@@ -73,11 +88,13 @@ public class LocationServiceImpl
         return docs;
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     public String getDocumentsWithinBoundsJSON(LatLon ne, LatLon sw)
     {
-        // XXX: Sucky querying algorithm, should be replaced by a real external
-        // lat/lon indexer
+        // XXX: Sucky querying algorithm, should be replaced by a better view
+        
 
         // first just query all objects with in the latitude interval in
         // question
@@ -111,7 +128,13 @@ public class LocationServiceImpl
         return json.toString();
     }
 
-
+    /**
+     * This method shows how you can get the raw JSON data in cases where you are just proxying the request for 
+     * a javascript client. This saves a little server processing as there is no JSONifying or JSON parsing nescessary.
+     * 
+     * @param docIds    list of doc ids to get as raw JSON from the _all_docs view
+     * @return
+     */
     private String getRawDocuments(List<String> docIds)
     {
         Map m = new HashMap();

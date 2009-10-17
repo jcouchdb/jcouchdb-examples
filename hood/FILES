@@ -1,0 +1,47 @@
+WebContent
+    WEB-INF
+        config
+            couchdb-config.xml      CouchDB server and database config
+            couchdb-services.xml    CouchDBUpdater config
+            security-config.xml     Spring security
+            services-config.xml     svenson JSON config, object services
+            webmvc-config.xml       Spring WebMVC config. 
+ 
+        designdocs                  source for CouchDB views
+            ...
+        lib                         runtime dependencies as jar files
+            ...
+        tags
+            hood-fn.tld     Some JSP EL functions for hood
+            link.tag        A link tag to avoid <c:url value=""/> for simple links
+            page.tag        general page layout as JSP tag file
+        views               contains the JSP views
+            delObject.jsp   Delete Object?
+            hood.jsp        main view
+            login.jsp       login view
+            newObject.jsp   new object view
+            objects.jsp     non-JS view for objects
+        web.xml             Servlet API web.xml file 
+    image                   Images
+        ... 
+    index.jsp               redirects to the hood view
+    script
+        firebug-emu.js      emulates firebug if not present
+        hood.js             main app script
+        jquery-1.3.2.js     jquery 1.3.2
+        json2.js            JSON api by Douglas Crockford (for those browser who don't do it natively)
+    style                   CSS files
+        ...
+build               
+    ...
+build.properties        contains the version number
+build.xml               ant build file
+lib                     Testing and non-eclipse dependencies as jars
+    ...
+misc                    SVG source images for the Marker icons
+    ...
+src                     source code
+    log4j.properties    Log4J configuration
+    ...                 
+test                    test source code
+    ...

@@ -1,4 +1,4 @@
-<%-- Zum DSPC Home Controller weiterleiten --%>
+<%-- redirect to home view --%>
 <%
 	response.sendRedirect(request.getContextPath()+"/app/home");
 %>

@@ -9,7 +9,12 @@ import org.svenson.converter.DateConverter;
 import org.svenson.converter.DefaultTypeConverterRepository;
 import org.svenson.matcher.SubtypeMatcher;
 
-
+/**
+ * Creates a project global JSON config.
+ * 
+ * @author shelmberger
+ *
+ */
 public class JSONConfigFactory
 {
     public JSONConfig createJSONConfig()
@@ -19,7 +24,8 @@ public class JSONConfigFactory
         DefaultTypeConverterRepository typeConverterRepository = new DefaultTypeConverterRepository();
         typeConverterRepository.addTypeConverter(new DateConverter());
         typeConverterRepository.addTypeConverter(new LatLongConverter());
-        
+   
+        // we use the new sub type matcher  
         ClassNameBasedTypeMapper typeMapper = new ClassNameBasedTypeMapper();
         typeMapper.setBasePackage(AppDocument.class.getPackage().getName());
         typeMapper.setEnforcedBaseType(AppDocument.class);

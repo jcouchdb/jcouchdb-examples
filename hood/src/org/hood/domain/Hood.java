@@ -2,7 +2,9 @@ package org.hood.domain;
 
 public class Hood extends PositionedDocument
 {
-    private String userId, name, description, defaultHood;
+    private String userId, name, description;
+    
+    private boolean defaultHood;
 
     public String getUserId()
     {
@@ -36,12 +38,12 @@ public class Hood extends PositionedDocument
         this.description = description;
     }
 
-    public String getDefaultHood()
+    public boolean isDefaultHood()
     {
         return defaultHood;
     }
 
-    public void setDefaultHood(String defaultHood)
+    public void setDefaultHood(boolean defaultHood)
     {
         this.defaultHood = defaultHood;
     }
