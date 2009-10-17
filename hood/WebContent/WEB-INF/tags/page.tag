@@ -25,11 +25,7 @@
 <c:forTokens var="item" items="${stylesheet}" delims=",">
 <link rel="stylesheet" href="<c:url value="/style/"/>${item}" type="text/css" media="screen, projection" />
 </c:forTokens>
-<!-- 
 <script type="text/javascript" src="http://www.google.com/jsapi?key=ABQIAAAA9KHSN9V8JlBG-E7OqIwl9RRtJcnXFm2bRbOk4DF_xY85BAOt6hRQEQiQ9j4QxID_rn_n9nwTUAWi7w">
-</script>
- -->
-<script type="text/javascript" src="http://www.google.com/jsapi?key=ABQIAAAA9KHSN9V8JlBG-E7OqIwl9RRwMbiUNIC7zGG2EojHKd3yM20VgRT7CYjvse_NlgWGtB7zgI2w5yKeQw">
 </script>
 <script type="text/javascript" src="<c:url value="/script/jquery-1.3.2.js"/>">
 </script>

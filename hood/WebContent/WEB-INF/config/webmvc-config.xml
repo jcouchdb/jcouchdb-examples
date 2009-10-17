@@ -8,7 +8,7 @@
 
 
     <context:annotation-config />
-    
+
     <context:component-scan base-package="org.hood.controller"/>
     
     <bean name="/login" class="org.springframework.web.servlet.mvc.UrlFilenameViewController" />

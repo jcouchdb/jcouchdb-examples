@@ -1,17 +1,18 @@
 package org.hood.controller;
 
-import java.util.List;
-
 import org.hood.HoodService;
-import org.hood.LocationService;
 import org.hood.domain.Hood;
-import org.jcouchdb.db.Database;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/**
+ * Allows viewing the hoods. 
+ * @author shelmberger
+ *
+ */
 @Controller
 public class HoodController
 {
@@ -23,13 +24,24 @@ public class HoodController
         this.hoodService = hoodService;
     }
     
-    
+    /**
+     * Shows the hood view with default hood.
+     * 
+     * @param model     model map
+     * @return
+     */
     @RequestMapping("/home")
     public String showHome(ModelMap model)
     {
         return showHood(model, hoodService.getDefault());
     }
 
+    /**
+     * Shows the hood with the given id
+     * @param model     model map
+     * @param id        id
+     * @return
+     */
     @RequestMapping("/hood")
     public String showHood(ModelMap model, @RequestParam("id") String id)
     {
@@ -37,7 +49,13 @@ public class HoodController
         return showHood(model, hood);
     }
 
-    
+    /**
+     * Populate the model with the given hood and return the hood view.
+     * 
+     * @param model     model map
+     * @param hood      hood object
+     * @return
+     */
     public String showHood(ModelMap model, Hood hood)
     {
         
@@ -45,5 +63,4 @@ public class HoodController
         model.addAttribute("hood", hood);
         return "hood";
     }
-    
 }

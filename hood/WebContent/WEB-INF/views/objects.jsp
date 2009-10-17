@@ -16,22 +16,19 @@ No objects in area
 <tr>
     <th>&nbsp;</th>
     <th>Name</th>
-    <th>Type</th>
-    <th>Description</th>
+    <th>Map</th>
 </tr>
 <c:forEach var="doc" items="${docs}">
 <tr>
-    <td>
+    <td valign="top">
         <hood:link href="/app/del?id=${doc.id}">Del</hood:link>
     </td>
-    <td>
-        <c:out value="${doc.name}"/>
-    </td>
-	<td>
-        <c:out value="${doc.documentType}"/>
-    </td>
-    <td>
+    <td valign="top">
+        <c:out value="${doc.name}"/><br/>
         <c:out value="${doc.description}"/>
+    </td>
+    <td>
+        <img width="384" height="384" src="http://maps.google.com/maps/api/staticmap?center=${doc.location.latitude},${doc.location.longitude}&zoom=14&size=384x384&maptype=roadmap&markers=color:blue|${doc.location.latitude},${doc.location.longitude}&sensor=false&key=ABQIAAAA9KHSN9V8JlBG-E7OqIwl9RRtJcnXFm2bRbOk4DF_xY85BAOt6hRQEQiQ9j4QxID_rn_n9nwTUAWi7w"/>
     </td>
 </tr>
 </c:forEach>

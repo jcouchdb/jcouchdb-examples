@@ -2,19 +2,15 @@ package org.hood.controller;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hood.HoodService;
 import org.hood.LocationService;
 import org.hood.domain.LatLon;
 import org.hood.domain.PositionedDocument;
 import org.hood.util.GzippedResponseUtil;
-import org.jcouchdb.db.Database;
-import org.jcouchdb.db.Options;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,18 +20,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.svenson.JSONConfig;
 
+/**
+ * Provides AJAX or non-AJAX access to the locations stored.
+ * 
+ * @author shelmberger
+ *
+ */
 @Controller
 public class LocationController
 {
     private static Logger log = LoggerFactory.getLogger(LocationController.class);
-    
+
+    /** Non-AJAX latitude default offset */
     private final static double DEFAULT_LAT_OFFSET = 0.032;
+    /** Non-AJAX latitude default offset */
     private final static double DEFAULT_LON_OFFSET = 0.013;
     
     
     private LocationService locationService;
-    
-    private JSONConfig jsonConfig;
     
     @Autowired
     public void setLocationService(LocationService locationService)
@@ -43,13 +45,14 @@ public class LocationController
         this.locationService = locationService;
     }
     
-    @Autowired
-    public void setJsonConfig(JSONConfig jsonConfig)
-    {
-        this.jsonConfig = jsonConfig;
-    }
-    
-    
+    /**
+     * Shows the objects view in the default distance around the given center.
+     * Only called for clients without javascript.
+     * @param model
+     * @param centerLat
+     * @param centerLon
+     * @return
+     */
     @RequestMapping("/objects")
     public String listObjects(
         ModelMap model,

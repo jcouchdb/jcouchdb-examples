@@ -14,6 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.svenson.JSONConfig;
 
+/**
+ * Deletes positioned documents after confirmation.
+ * 
+ * @author shelmberger
+ *
+ */
 @Controller
 public class DelObjectController
 {
@@ -44,7 +50,16 @@ public class DelObjectController
         
         return modelAndView;
     }
-    
+   
+    /**
+     * Really deletes an object
+     * 
+     * @param ajax      if not <code>null</code>, render JSON response, else redirect to "/app/home" after deletion
+     * @param ok        if not <code>null</code> signals that the user clicked ok
+     * @param id        _id of the document to delete
+     * @param rev       _rev of the document to delete
+     * @return
+     */
     @RequestMapping("/del/ok")
     public ModelAndView createNew(
         @RequestParam(value = "ajax", required = false) String ajax,
