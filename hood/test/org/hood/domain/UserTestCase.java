@@ -18,10 +18,10 @@ public class UserTestCase extends AbstractAppIntegrationTestCase
         
         User u = new User();
         u.setName("admin");
-        AppUserDetails appUserDetails = new AppUserDetails(u);
+        CouchDBDetails couchDBDetails = new CouchDBDetails(u);
         ReflectionSaltSource reflectionSaltSource = new ReflectionSaltSource();
         reflectionSaltSource.setUserPropertyToUse("saltKey");
-        String hash = encoder.encodePassword("admin", reflectionSaltSource.getSalt(appUserDetails));
+        String hash = encoder.encodePassword("admin", reflectionSaltSource.getSalt(couchDBDetails));
         u.setPasswordHash(hash);
     
         Database db =(Database)applicationContext.getBean("systemDatabase");

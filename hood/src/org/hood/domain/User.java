@@ -4,6 +4,12 @@ import java.util.List;
 
 import org.svenson.JSONProperty;
 
+/**
+ * User domain object. 
+ * 
+ * @author shelmberger
+ *
+ */
 public class User extends Person
 {
     private String passwordHash, description;
@@ -23,6 +29,7 @@ public class User extends Person
         return passwordHash;
     }
 
+    @Override
     public String getDescription()
     {
         return description;
@@ -33,6 +40,7 @@ public class User extends Person
         this.passwordHash = passwordHash;
     }
 
+    @Override
     public void setDescription(String description)
     {
         this.description = description;

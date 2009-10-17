@@ -5,12 +5,12 @@ import org.svenson.converter.JSONConverter;
 
 public class PositionedDocument
     extends AppDocument
-    implements Positioned
 {
     private LatLon location;
 
     private String name;
 
+    private String description;
 
     /** {@inheritDoc} */
     public LatLon getLocation()
@@ -38,6 +38,18 @@ public class PositionedDocument
     public void setName(String name)
     {
         this.name = name;
+    }
+
+
+    public String getDescription()
+    {
+        return description;
+    }
+
+
+    public void setDescription(String description)
+    {
+        this.description = description;
     }
 
 }

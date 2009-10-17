@@ -1,19 +1,13 @@
 package org.hood.domain;
 
-
+/**
+ * Extension of positioned document representing a place of interest.
+ * 
+ * @author shelmberger
+ *
+ */
 public class Place
     extends PositionedDocument
 {
-    private String description;
-
-    public String getDescription()
-    {
-        return description;
-    }
-
-    public void setDescription(String description)
-    {
-        this.description = description;
-    }
     
 }

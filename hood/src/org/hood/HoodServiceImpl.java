@@ -1,6 +1,5 @@
 package org.hood;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +8,11 @@ import org.hood.domain.LatLon;
 import org.jcouchdb.db.Database;
 import org.jcouchdb.document.ValueAndDocumentRow;
 import org.jcouchdb.document.ViewAndDocumentsResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.util.Assert;
 import org.svenson.JSONConfig;
 
 /**
@@ -18,8 +21,10 @@ import org.svenson.JSONConfig;
  * @author shelmberger
  *
  */
-public class HoodServiceImpl implements HoodService
+public class HoodServiceImpl implements HoodService, InitializingBean
 {
+    private static Logger log = LoggerFactory.getLogger(HoodServiceImpl.class);
+    
     /** the hood database */
     private Database systemDatabase;
 
@@ -48,8 +53,9 @@ public class HoodServiceImpl implements HoodService
     @Required
     public void setSystemDatabase(Database systemDatabase)
     {
+        Assert.notNull(systemDatabase, "systemDatabase can't be null");
+        
         this.systemDatabase = systemDatabase;
-        getDefault();
     }
 
     /**
@@ -108,8 +114,9 @@ public class HoodServiceImpl implements HoodService
         {
             Hood hood = new Hood();
             hood.setName("Default Hood");
-            hood.setDescription("This only exists because there is no hood defined yet.");
-            hood.setLocation(new LatLon(0.0, 0.0));
+            hood.setDescription("This only exists because there is no hood defined yet. It is placed here because of a reason connected to CouchDB.");
+            // some place in Charlotte, NC, USA
+            hood.setLocation(new LatLon(35.225052,-80.839291));
             hood.setDefaultHood(false);
             
             haveDefault = true;
@@ -128,5 +135,11 @@ public class HoodServiceImpl implements HoodService
     public Hood getHood(String id)
     {
         return systemDatabase.getDocument(Hood.class, id, null, jsonConfig.getJsonParser());
+    }
+
+    public void afterPropertiesSet() throws Exception
+    {
+        // initialize default hood
+        getDefault();
     }
 }

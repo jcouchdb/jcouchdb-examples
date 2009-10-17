@@ -8,6 +8,7 @@
 <meta name="hood_info" content="${hoodfn:json(pageContext.request,hood)}"/>
 </jsp:attribute>
 <jsp:attribute name="sidebar">
+<div class="hoods">
 <c:forEach var="curHood" items="${hoods}">
     <c:choose>
         <c:when test="${curHood.id == hood.id}">
@@ -18,6 +19,7 @@
         </c:otherwise>
     </c:choose>
 </c:forEach>
+</div>
 </jsp:attribute>
 <jsp:body>
 <div id="map">

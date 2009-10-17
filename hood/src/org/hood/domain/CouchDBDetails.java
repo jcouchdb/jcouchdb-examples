@@ -6,7 +6,13 @@ import org.springframework.security.GrantedAuthority;
 import org.springframework.security.GrantedAuthorityImpl;
 import org.springframework.security.userdetails.UserDetails;
 
-public class AppUserDetails
+/**
+ * Userdetails implementation based on the {@link User} object
+ * 
+ * @author shelmberger
+ *
+ */
+public class CouchDBDetails
     implements UserDetails
 {
     private static final long serialVersionUID = -1293499923487390796L;
@@ -28,7 +34,7 @@ public class AppUserDetails
     private String userId;
 
 
-    public AppUserDetails(User u)
+    public CouchDBDetails(User u)
     {
         name = u.getName();
         passwordHash = u.getPasswordHash();

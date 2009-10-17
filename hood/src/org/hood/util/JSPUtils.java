@@ -9,6 +9,12 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.support.RequestContextUtils;
 import org.svenson.JSONConfig;
 
+/**
+ * Contains static JSP helper methods.
+ * 
+ * @author shelmberger
+ *
+ */
 public class JSPUtils
 {
     private static Logger log = LoggerFactory.getLogger(JSPUtils.class);

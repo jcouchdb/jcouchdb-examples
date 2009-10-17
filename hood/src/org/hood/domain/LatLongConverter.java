@@ -5,6 +5,11 @@ import java.util.List;
 
 import org.svenson.converter.TypeConverter;
 
+/**
+ * JSON type converter that convertes {@link LatLon} instances to Arrays ( <code>[ latitude, longitude ]</code> ) and back.
+ * @author shelmberger
+ *
+ */
 public class LatLongConverter implements TypeConverter
 {
 

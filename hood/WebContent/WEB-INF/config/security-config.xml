@@ -29,7 +29,7 @@
 		</security:password-encoder>
     </security:authentication-provider>
     
-    <bean id="userDetailsService" class="org.hood.auth.AppUserDetailsService">
-    	<property name="systemDatabase" ref="systemDatabase" />
+    <bean id="userDetailsService" class="org.hood.auth.CouchDBDetailsService">
+    	<property name="database" ref="systemDatabase" />
     </bean>
 </beans>

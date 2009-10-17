@@ -3,6 +3,12 @@ package org.hood.domain;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Represents the rating of a {@link PositionedDocument}. Not really used yet.
+ * 
+ * @author shelmberger
+ *
+ */
 public class Rating
     extends AppDocument
 {

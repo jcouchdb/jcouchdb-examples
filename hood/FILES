@@ -2,7 +2,8 @@ WebContent
     WEB-INF
         config
             couchdb-config.xml      CouchDB server and database config
-            couchdb-services.xml    CouchDBUpdater config
+            couchdb-services.xml    CouchDBUpdater config that pushes the source views to
+                                    the CouchDB server
             security-config.xml     Spring security
             services-config.xml     svenson JSON config, object services
             webmvc-config.xml       Spring WebMVC config. 

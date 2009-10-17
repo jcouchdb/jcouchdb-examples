@@ -32,6 +32,37 @@ function onMarkerDelClick(ev)
     return false;
 }
 
+function createMarkerForObj(obj)
+{
+    if (!allMarkers[obj._id])
+    {
+        var point = new google.maps.LatLng(obj.loc[0], obj.loc[1]);
+        
+        var typeIconUrls = typeIcons[obj.docType];
+        
+        if (typeIconUrls)
+        {            
+            var icon = new google.maps.Icon(baseIcon);
+            icon.image = baseURL + typeIconUrls.icon;
+            icon.shadow = baseURL + typeIconUrls.shadow;
+        }
+        else
+        {
+            icon = G_DEFAULT_ICON;
+        }
+        
+        var marker = new google.maps.Marker(point, {icon: icon});
+        map.addOverlay(marker);
+        var $wnd = $("<div class=\"infoWnd\"><b>" + obj.name + "</b><br/>" + obj.description + "<p><a class=\"del\" href=\"../app/del?ajax=1&id=" + obj._id + "\">Delete</a></p></div>");
+        
+        $("a.del", $wnd).click( onMarkerDelClick);
+                    
+        marker.bindInfoWindow($wnd[0]);
+
+        allMarkers[obj._id] = marker;
+    }
+}
+
 
 function receiveObjectsResponse(result)
 {
@@ -40,35 +71,7 @@ function receiveObjectsResponse(result)
     for (var i=0; i < len; i++)
     {
         var obj = rows[i].doc;
-        
-        if (!allMarkers[obj._id])
-        {
-            
-            var point = new google.maps.LatLng(obj.loc[0], obj.loc[1]);
-            
-            var typeIconUrls = typeIcons[obj.docType];
-            
-            if (typeIconUrls)
-            {            
-                var icon = new google.maps.Icon(baseIcon);
-                icon.image = baseURL + typeIconUrls.icon;
-                icon.shadow = baseURL + typeIconUrls.shadow;
-            }
-            else
-            {
-                icon = G_DEFAULT_ICON;
-            }
-            
-            var marker = new google.maps.Marker(point, {icon: icon});
-            map.addOverlay(marker);
-            var $wnd = $("<div class=\"infoWnd\"><b>" + obj.name + "</b><br/>" + obj.description + "<p><a class=\"del\" href=\"../app/del?ajax=1&id=" + obj._id + "\">Delete</a></p></div>");
-            
-            $("a.del", $wnd).click( onMarkerDelClick);
-                        
-            marker.bindInfoWindow($wnd[0]);
-
-            allMarkers[obj._id] = marker;
-        }
+        createMarkerForObj(obj);
     }
 }
     
@@ -294,7 +297,14 @@ function initialize() {
     google.maps.Event.addListener( map, "zoomend", throttleLoadObjects); 
     google.maps.Event.addListener( map, "moveend", throttleLoadObjects); 
     
-    loadObjectsInBounds();
+    if (!hood.defaultHood)
+    {
+        createMarkerForObj(hood);
+    }
+    else
+    {
+        loadObjectsInBounds();
+    }
 }
 google.setOnLoadCallback(initialize);
 

@@ -1,6 +1,6 @@
 package org.hood.auth;
 
-import org.hood.domain.AppUserDetails;
+import org.hood.domain.CouchDBDetails;
 import org.hood.domain.User;
 import org.jcouchdb.db.Database;
 import org.jcouchdb.db.Options;
@@ -12,22 +12,35 @@ import org.springframework.security.userdetails.UserDetailsService;
 import org.springframework.security.userdetails.UsernameNotFoundException;
 import org.svenson.JSONConfig;
 
-public class AppUserDetailsService implements UserDetailsService
+/**
+ * A Spring security {@link UserDetailsService} implementation for CouchDB
+ * 
+ * @author shelmberger
+ *
+ */
+public class CouchDBDetailsService implements UserDetailsService
 {
-    private Database systemDatabase;
+    private Database database;
     private JSONConfig jsonConfig;
     
+    /**
+     * Configures the CouchDB {@link Database} from which to retrieve the user objects
+     * @param database
+     */
     @Required
-    public void setSystemDatabase(Database systemDatabase)
+    public void setDatabase(Database database)
     {
-        this.systemDatabase = systemDatabase;
+        this.database = database;
     }
 
+    /**
+     * Loads the User based on the user name.
+     */
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException,
         DataAccessException
     {
-        
-        ViewAndDocumentsResult<Object, User> result =  systemDatabase.queryViewAndDocuments("user/byName", Object.class, User.class, new Options().key(name), jsonConfig.getJsonParser());        
+        // Retrieve the user/byName view including documents parsed into User objects.
+        ViewAndDocumentsResult<Object, User> result =  database.queryViewAndDocuments("user/byName", Object.class, User.class, new Options().key(name), jsonConfig.getJsonParser());        
         if (result.getRows().size() == 0)
         {
             throw new UsernameNotFoundException("No user with name '" + name + "' found.");
@@ -37,7 +50,7 @@ public class AppUserDetailsService implements UserDetailsService
             throw new UsernameNotFoundException("More than one user with name '" + name + "' found.");
         }
         
-        return new AppUserDetails(result.getRows().get(0).getDocument());
+        return new CouchDBDetails(result.getRows().get(0).getDocument());
     }
 
 }

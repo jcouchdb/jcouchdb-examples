@@ -1,8 +1,14 @@
 package org.hood.domain;
 
+/**
+ * Extends {@link PositionedDocument} to represents a hood -- a user configurable central point of interest.
+ *  
+ * @author shelmberger
+ *
+ */
 public class Hood extends PositionedDocument
 {
-    private String userId, name, description;
+    private String userId, name;
     
     private boolean defaultHood;
 
@@ -17,11 +23,6 @@ public class Hood extends PositionedDocument
         return name;
     }
 
-    public String getDescription()
-    {
-        return description;
-    }
-
     public void setUserId(String userId)
     {
         this.userId = userId;
@@ -31,11 +32,6 @@ public class Hood extends PositionedDocument
     public void setName(String name)
     {
         this.name = name;
-    }
-
-    public void setDescription(String description)
-    {
-        this.description = description;
     }
 
     public boolean isDefaultHood()
