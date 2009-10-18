@@ -28,7 +28,6 @@ public class JSONConfigFactory
         // we use the new sub type matcher  
         ClassNameBasedTypeMapper typeMapper = new ClassNameBasedTypeMapper();
         typeMapper.setBasePackage(AppDocument.class.getPackage().getName());
-        
         // we only want to have AppDocument instances
         typeMapper.setEnforcedBaseType(AppDocument.class);
         // we use the docType property of the AppDocument 

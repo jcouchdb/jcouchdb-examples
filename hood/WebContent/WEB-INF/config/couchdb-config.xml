@@ -12,9 +12,10 @@
 
 
     <context:annotation-config />
-    <bean id="domainObjectJSONFactory" class="org.hood.JSONConfigFactory"/>
     
-    <bean id="jsonConfig" factory-bean="domainObjectJSONFactory" factory-method="createJSONConfig"/>
+    <bean id="jsonConfigFactory" class="org.hood.JSONConfigFactory"/>
+    
+    <bean id="jsonConfig" factory-bean="jsonConfigFactory" factory-method="createJSONConfig"/>
 
     <bean id="couchDBServer" class="org.jcouchdb.db.ServerImpl">
         <constructor-arg value="localhost"/>

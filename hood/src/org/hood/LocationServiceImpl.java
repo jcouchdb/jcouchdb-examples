@@ -116,7 +116,7 @@ public class LocationServiceImpl
         }
         
         String json = getRawDocuments(docIds);
-        log.debug("Raw JSON: {}", json);
+        log.trace("Raw JSON: {}", json);
         return json.toString();
     }
 
@@ -158,6 +158,7 @@ public class LocationServiceImpl
         Object value = row.getValue();
         if (value instanceof String)
         {
+            log.warn("Value is String, not Double");
             return Double.parseDouble((String)value);
         }
         else
@@ -167,7 +168,7 @@ public class LocationServiceImpl
     }
 
 
-    private Options getLatLonOptions(LatLon ne, LatLon sw)
+    static Options getLatLonOptions(LatLon ne, LatLon sw)
     {
         double startLat = ne.getLatitude();
         double endLat = sw.getLatitude();

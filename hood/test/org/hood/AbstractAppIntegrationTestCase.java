@@ -2,6 +2,15 @@ package org.hood;
 
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
 
+/**
+ * Base class for CouchDB integration tests. This just
+ * reuses some of our (conviently separated) spring context 
+ * definitions for test cases. You can extend this class
+ * for your own tests. 
+ * 
+ * @author shelmberger
+ *
+ */
 public abstract class AbstractAppIntegrationTestCase
     extends AbstractDependencyInjectionSpringContextTests
 {
