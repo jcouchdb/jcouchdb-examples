@@ -10,17 +10,11 @@
 
     <context:annotation-config />
 
-    <bean id="domainObjectJSONFactory" class="org.hood.JSONConfigFactory"/>
-    
-    <bean id="jsonConfig" factory-bean="domainObjectJSONFactory" factory-method="createJSONConfig"/>
-
     <bean id="hoodService" class="org.hood.HoodServiceImpl">
         <property name="systemDatabase" ref="systemDatabase"/>
-        <property name="jsonConfig" ref="jsonConfig"/>
     </bean>
     
     <bean id="locationService" class="org.hood.LocationServiceImpl">
-        <property name="jsonConfig" ref="jsonConfig"/>
         <property name="systemDatabase" ref="systemDatabase"/>
     </bean>
 

@@ -10,7 +10,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.security.userdetails.UserDetails;
 import org.springframework.security.userdetails.UserDetailsService;
 import org.springframework.security.userdetails.UsernameNotFoundException;
-import org.svenson.JSONConfig;
 
 /**
  * A Spring security {@link UserDetailsService} implementation for CouchDB
@@ -21,7 +20,6 @@ import org.svenson.JSONConfig;
 public class CouchDBDetailsService implements UserDetailsService
 {
     private Database database;
-    private JSONConfig jsonConfig;
     
     /**
      * Configures the CouchDB {@link Database} from which to retrieve the user objects
@@ -40,7 +38,7 @@ public class CouchDBDetailsService implements UserDetailsService
         DataAccessException
     {
         // Retrieve the user/byName view including documents parsed into User objects.
-        ViewAndDocumentsResult<Object, User> result =  database.queryViewAndDocuments("user/byName", Object.class, User.class, new Options().key(name), jsonConfig.getJsonParser());        
+        ViewAndDocumentsResult<Object, User> result =  database.queryViewAndDocuments("user/byName", Object.class, User.class, new Options().key(name), null);        
         if (result.getRows().size() == 0)
         {
             throw new UsernameNotFoundException("No user with name '" + name + "' found.");

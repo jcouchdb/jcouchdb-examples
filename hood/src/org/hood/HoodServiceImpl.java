@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.util.Assert;
-import org.svenson.JSONConfig;
 
 /**
  * Hood Service implementation based on couchdb.
@@ -28,23 +27,9 @@ public class HoodServiceImpl implements HoodService, InitializingBean
     /** the hood database */
     private Database systemDatabase;
 
-    /** the json config used */
-    private JSONConfig jsonConfig;
-
     /** Did we have a default hood yet? */
     private boolean haveDefault = false; 
     
-    /**
-     * Configures the JSON config
-     * 
-     * @param jsonConfig
-     */
-    @Required
-    public void setJsonConfig(JSONConfig jsonConfig)
-    {
-        this.jsonConfig = jsonConfig;
-    }
-
     /**
      * Provices the system database
      * 
@@ -90,7 +75,7 @@ public class HoodServiceImpl implements HoodService, InitializingBean
         // query the hood/byName view including Documents 
         // we're using Object.class as view.class because we don't care.. if you use Object, the value ends up being a list or a map, depending on mapped value.
         // this is the normal state for the key object.
-        ViewAndDocumentsResult<Object, Hood> result = systemDatabase.queryViewAndDocuments("hood/byName", Object.class, Hood.class, null, jsonConfig.getJsonParser());
+        ViewAndDocumentsResult<Object, Hood> result = systemDatabase.queryViewAndDocuments("hood/byName", Object.class, Hood.class, null, null);
 
         // iterate over all rows and collect hoods in list 
         List<Hood> hoods = new ArrayList<Hood>();
@@ -107,7 +92,7 @@ public class HoodServiceImpl implements HoodService, InitializingBean
     public Hood getDefault()
     {
         // query and return the supposedly only object in the all views 
-        ViewAndDocumentsResult<String, Hood> result = systemDatabase.queryViewAndDocuments("hood/default", String.class, Hood.class, null, jsonConfig.getJsonParser());
+        ViewAndDocumentsResult<String, Hood> result = systemDatabase.queryViewAndDocuments("hood/default", String.class, Hood.class, null, null);
         
         // if we have no object, we create a new one
         if (result.getRows().size() < 1)
@@ -134,7 +119,7 @@ public class HoodServiceImpl implements HoodService, InitializingBean
      */
     public Hood getHood(String id)
     {
-        return systemDatabase.getDocument(Hood.class, id, null, jsonConfig.getJsonParser());
+        return systemDatabase.getDocument(Hood.class, id, null, null);
     }
 
     public void afterPropertiesSet() throws Exception

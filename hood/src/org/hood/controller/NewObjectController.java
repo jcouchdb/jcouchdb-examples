@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.hood.LocationService;
+import org.hood.domain.LatLon;
 import org.hood.util.JSONView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -92,6 +93,8 @@ public class NewObjectController
         }
 
         log.debug("Request value is {}, creating {}", request.getParameter("name"), newObjectCommand);
+        
+        locationService.createLocation(newObjectCommand.getLocationType(), newObjectCommand.getName(), newObjectCommand.getDescription(), new LatLon(newObjectCommand.getLat(), newObjectCommand.getLon()));
         
         if (ajax != null)
         {            

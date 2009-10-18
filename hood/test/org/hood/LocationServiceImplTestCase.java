@@ -1,8 +1,15 @@
 package org.hood;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+
 import java.util.Arrays;
 import java.util.List;
 
+import org.hood.domain.Hood;
+import org.hood.domain.LatLon;
+import org.hood.domain.Place;
 import org.hood.domain.PositionedDocument;
 import org.jcouchdb.db.Database;
 import org.jcouchdb.document.ValueAndDocumentRow;
@@ -11,7 +18,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.svenson.JSONConfig;
 
 
 public class LocationServiceImplTestCase extends AbstractAppIntegrationTestCase
@@ -20,20 +26,33 @@ public class LocationServiceImplTestCase extends AbstractAppIntegrationTestCase
     
     @Autowired
     private Database systemDatabase;
-    @Autowired
-    private JSONConfig jsonConfig;
     
     @Test
     public void testGetByKeys()
     {
-        List<String> keys = Arrays.asList("7c2e48fc12e5e8f08c836e06972ab416","4baae3e9cf34df59eca5ca6b6709fb87","1ee33fa85efc7c41dc837b86d3ad31d6");
-
-        ViewAndDocumentsResult<Object, PositionedDocument> result = systemDatabase.queryDocumentsByKeys(Object.class, PositionedDocument.class, keys, null, jsonConfig.getJsonParser());
+        Hood hood = new Hood();
+        hood.setName("Test Hood");
+        hood.setLocation(new LatLon(1,1));
+        hood.setProperty("test", true);
+        systemDatabase.createDocument(hood);
+       
+        Place place = new Place();
+        place.setName("Test Place");
+        place.setLocation(new LatLon(2,2));
+        place.setProperty("test", true);
+        systemDatabase.createDocument(place);
         
-        for (ValueAndDocumentRow<Object, PositionedDocument> row : result.getRows())
-        {
-            log.info("{}", row.getDocument());
-        }
+        List<String> keys = Arrays.asList(hood.getId(), place.getId());
+        
+        ViewAndDocumentsResult<Object, PositionedDocument> result = systemDatabase.queryDocumentsByKeys(Object.class, PositionedDocument.class, keys, null, null);
+        
+        assertThat(result, is(notNullValue()));
+        assertThat(result.getRows().size(), is(2));
+        assertThat(result.getRows().get(0).getDocument(), is(Hood.class));
+        assertThat(result.getRows().get(1).getDocument(), is(Place.class));
+        
+        systemDatabase.delete(place);
+        systemDatabase.delete(hood);
         
     }
 }

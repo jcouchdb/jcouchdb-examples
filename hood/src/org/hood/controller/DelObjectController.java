@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.svenson.JSONConfig;
 
 /**
  * Deletes positioned documents after confirmation.
@@ -24,14 +23,6 @@ import org.svenson.JSONConfig;
 public class DelObjectController
 {
     private Database systemDatabase;
-    
-    private JSONConfig jsonConfig;
-    
-    @Autowired
-    public void setJsonConfig(JSONConfig jsonConfig)
-    {
-        this.jsonConfig = jsonConfig;
-    }
     
     @Autowired
     public void setSystemDatabase(Database systemDatabase)
@@ -45,7 +36,7 @@ public class DelObjectController
     {
         ModelAndView modelAndView = new ModelAndView("delObject");
         
-        PositionedDocument doc = systemDatabase.getDocument(PositionedDocument.class, id, null, jsonConfig.getJsonParser());
+        PositionedDocument doc = systemDatabase.getDocument(PositionedDocument.class, id, null, null);
         modelAndView.addObject("doc", doc);
         
         return modelAndView;

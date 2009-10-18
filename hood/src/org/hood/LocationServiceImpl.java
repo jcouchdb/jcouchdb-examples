@@ -20,6 +20,7 @@ import org.jcouchdb.document.ViewResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
+import org.svenson.JSON;
 import org.svenson.JSONConfig;
 
 /**
@@ -34,18 +35,6 @@ public class LocationServiceImpl
     private static Logger log = LoggerFactory.getLogger(LocationServiceImpl.class);
     
     private Database systemDatabase;
-
-    private JSONConfig jsonConfig;
-
-    /**
-     * Configures the JSONConfig to be used 
-     * @param jsonConfig
-     */
-    @Required
-    public void setJsonConfig(JSONConfig jsonConfig)
-    {
-        this.jsonConfig = jsonConfig;
-    }
 
     /**
      * Configures the hood system database
@@ -77,7 +66,7 @@ public class LocationServiceImpl
 
         ViewAndDocumentsResult<Object, PositionedDocument> result = systemDatabase
             .queryViewAndDocuments("objects/byLat", Object.class, PositionedDocument.class,
-                getLatLonOptions(ne, sw), jsonConfig.getJsonParser());
+                getLatLonOptions(ne, sw), null);
         for (ValueAndDocumentRow<Object, PositionedDocument> row : result.getRows())
         {
             Double longitude = getDoubleFromRow(row);
@@ -102,7 +91,7 @@ public class LocationServiceImpl
         // first just query all objects with in the latitude interval in
         // question
         ViewResult<Object> result = systemDatabase.queryView("objects/byLat", Object.class,
-            getLatLonOptions(ne, sw), jsonConfig.getJsonParser());
+            getLatLonOptions(ne, sw), null);
         double startLon = ne.getLongitude();
         double endLon = sw.getLongitude();
 
@@ -147,7 +136,7 @@ public class LocationServiceImpl
         try
         {
             // get all docs by posting the keys to _all_docs
-            response = systemDatabase.getServer().post("/" + systemDatabase.getName() + "/_all_docs?include_docs=true", jsonConfig.getJsonGenerator().forValue(m));
+            response = systemDatabase.getServer().post("/" + systemDatabase.getName() + "/_all_docs?include_docs=true", JSON.defaultJSON().forValue(m));
             return response.getContentAsString();
         }
         finally

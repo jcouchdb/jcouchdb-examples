@@ -12,6 +12,9 @@
 
 
     <context:annotation-config />
+    <bean id="domainObjectJSONFactory" class="org.hood.JSONConfigFactory"/>
+    
+    <bean id="jsonConfig" factory-bean="domainObjectJSONFactory" factory-method="createJSONConfig"/>
 
     <bean id="couchDBServer" class="org.jcouchdb.db.ServerImpl">
         <constructor-arg value="localhost"/>
@@ -20,9 +23,7 @@
     <bean id="systemDatabase" class="org.jcouchdb.db.Database">
         <constructor-arg ref="couchDBServer"/>
         <constructor-arg value="hood"/>
-        <property name="jsonGenerator">
-            <util:property-path path="jsonConfig.jsonGenerator" />
-        </property>
+        <property name="jsonConfig" ref="jsonConfig"/>
     </bean>
     
 </beans>
