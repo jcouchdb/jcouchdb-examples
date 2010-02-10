@@ -67,7 +67,7 @@ public class CouchDBDetails
             auths[idx++] = new GrantedAuthorityImpl(role);
         }
 
-        return null;
+        return auths;
     }
 
 
