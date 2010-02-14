@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
@@ -22,7 +23,7 @@ import org.springframework.web.servlet.mvc.Controller;
  */
 public class GzippedResponseUtil
 {
-    protected static Logger log = Logger.getLogger(GzippedResponseUtil.class);
+    private static Logger log = LoggerFactory.getLogger(GzippedResponseUtil.class);
 
     private GzippedResponseUtil()
     {
